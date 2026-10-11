@@ -1,0 +1,12 @@
+fastapi
+httpx2
+uvicorn[standard]
+python-dotenv
+pydantic
+requests
+numpy
+sentence-transformers
+scikit-learn
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt<4.1

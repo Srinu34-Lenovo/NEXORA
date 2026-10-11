@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f172a;
+            color: white;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 35px;
+            background: #1e293b;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            background: #0f172a;
+            color: white;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #0284c7;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0369a1;
+        }
+
+        #message {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #94a3b8;
+        }
+
+        .register-link a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">NEXORA</div>
+
+        <div class="subtitle">
+            Sign in to your AI workspace
+        </div>
+
+        <form id="loginForm">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+        <div class="register-link">
+            Don't have an account?
+            <a href="/frontend/register.html">Register</a>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const loginForm = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+        loginForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            message.textContent = "Logging in...";
+
+            try {
+
+                const response = await fetch("/auth/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.detail || "Login failed.";
+
+                    return;
+                }
+
+                // Save JWT token
+                localStorage.setItem(
+                    "nexora_token",
+                    data.access_token
+                );
+
+                // Save user information
+                localStorage.setItem(
+                    "nexora_user",
+                    JSON.stringify(data.user)
+                );
+
+                message.textContent = "Login successful!";
+
+                // Go to NEXORA main page
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 800);
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Unable to connect to NEXORA server.";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

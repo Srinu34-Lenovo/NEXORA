@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA — Personal Intelligence OS</title>
+
+    <link rel="stylesheet" href="/frontend/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">◆</div>
+
+            <div>
+                <h1>NEXORA</h1>
+                <span>Personal Intelligence OS</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <button class="nav-item active" data-page="chat">
+                <span>💬</span>
+                <span>Chat</span>
+            </button>
+
+            <button class="nav-item" data-page="memory">
+                <span>🧠</span>
+                <span>Memory</span>
+            </button>
+
+            <button class="nav-item" data-page="tasks">
+                <span>✅</span>
+                <span>Tasks</span>
+            </button>
+
+            <button class="nav-item" data-page="search">
+                <span>🔎</span>
+                <span>Search</span>
+            </button>
+
+            <button class="nav-item" data-page="agents">
+                <span>🤖</span>
+                <span>AI Agents</span>
+            </button>
+
+            <button class="nav-item" data-page="data">
+                <span>📊</span>
+                <span>Data</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <span>NEXORA Online</span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div class="mobile-menu" id="mobileMenu">
+                ☰
+            </div>
+
+            <div class="page-title">
+                <h2 id="pageTitle">Chat</h2>
+                <span id="pageSubtitle">
+                    Your personal AI intelligence system
+                </span>
+            </div>
+
+            <button class="profile-button" id="profileButton">
+
+                <div class="profile-avatar">
+                    👤
+                </div>
+
+                <div class="profile-info">
+                    <strong id="profileName">Guest User</strong>
+                    <span id="profileStatus">Not signed in</span>
+                </div>
+
+                <span class="profile-arrow">⌄</span>
+
+            </button>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <section class="content">
+
+            <!-- CHAT PAGE -->
+            <div class="page active" id="chatPage">
+
+                <div class="welcome">
+
+                    <span class="eyebrow">NEXORA INTELLIGENCE</span>
+
+                    <h1>
+                        Welcome back <span>👋</span>
+                    </h1>
+
+                    <p>
+                        What would you like NEXORA to help you with?
+                    </p>
+
+                </div>
+
+                <div class="chat-container">
+
+                    <div class="messages" id="messages">
+
+                        <div class="message assistant">
+
+                            <div class="message-avatar">
+                                ◆
+                            </div>
+
+                            <div class="message-content">
+
+                                <strong>NEXORA</strong>
+
+                                <p>
+                                    Hello! I'm NEXORA. 🧠
+                                </p>
+
+                                <p>
+                                    I can help you manage your memories,
+                                    tasks, knowledge and AI workflows.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="suggestions">
+
+                        <button class="suggestion">
+                            Tell me something about yourself
+                        </button>
+
+                        <button class="suggestion">
+                            Create a task
+                        </button>
+
+                        <button class="suggestion">
+                            Show my memories
+                        </button>
+
+                        <button class="suggestion">
+                            What can you do?
+                        </button>
+
+                    </div>
+
+
+                    <div class="chat-input-area">
+
+                        <textarea
+                            id="chatInput"
+                            placeholder="Message NEXORA..."
+                            rows="1"></textarea>
+
+                        <button id="sendButton" class="send-button">
+                            ➤
+                        </button>
+
+                    </div>
+
+                    <div class="input-hint">
+                        Press Enter to send • Shift + Enter for new line
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY PAGE -->
+            <div class="page" id="memoryPage">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">PERSONAL KNOWLEDGE</span>
+
+                        <h1>Memory</h1>
+
+                        <p>
+                            NEXORA's long-term memory.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" id="addMemoryButton">
+                        + Add Memory
+                    </button>
+
+                </div>
+
+
+                <div class="memory-input hidden" id="memoryInputBox">
+
+                    <textarea
+                        id="memoryInput"
+                        placeholder="Enter something you want NEXORA to remember..."></textarea>
+
+                    <div>
+                        <button class="secondary-button" id="cancelMemory">
+                            Cancel
+                        </button>
+
+                        <button class="primary-button" id="saveMemory">
+                            Save Memory
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <form class="search-box memory-search" id="memorySearchForm">
+
+                    <input
+                        type="search"
+                        id="memorySearchInput"
+                        aria-label="Search saved memories"
+                        placeholder="Search saved memories...">
+
+                    <button type="submit">Search</button>
+
+                </form>
+
+
+                <div class="cards-grid" id="memoryList">
+
+                    <div class="empty-state">
+                        <div>🧠</div>
+                        <h3>No memories yet</h3>
+                        <p>Add information that NEXORA should remember.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TASK PAGE -->
+            <div class="page" id="tasksPage">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">PRODUCTIVITY</span>
+
+                        <h1>Tasks</h1>
+
+                        <p>
+                            Manage your tasks and goals.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" id="addTaskButton">
+                        + New Task
+                    </button>
+
+                </div>
+
+
+                <div class="task-input hidden" id="taskInputBox">
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Enter task name...">
+
+                    <button class="primary-button" id="saveTask">
+                        Add Task
+                    </button>
+
+                </div>
+
+
+                <div id="taskList" class="task-list">
+
+                    <div class="empty-state">
+                        <div>✅</div>
+                        <h3>No tasks</h3>
+                        <p>Create your first task.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH PAGE -->
+            <div class="page" id="searchPage">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">KNOWLEDGE ENGINE</span>
+
+                        <h1>Search</h1>
+
+                        <p>
+                            Search your NEXORA knowledge base.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search memories, tasks and knowledge...">
+
+                    <button id="searchButton">
+                        🔎 Search
+                    </button>
+
+                </div>
+
+
+                <div id="searchResults">
+
+                    <div class="empty-state">
+                        <div>🔎</div>
+                        <h3>Ready to search</h3>
+                        <p>Enter something above.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI AGENTS PAGE -->
+            <div class="page" id="agentsPage">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">AUTONOMOUS AI</span>
+
+                        <h1>AI Agents</h1>
+
+                        <p>
+                            Intelligent agents for your workflows.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="agent-grid">
+
+                    <div class="agent-card">
+
+                        <div class="agent-icon">🧠</div>
+
+                        <h3>Research Agent</h3>
+
+                        <p>
+                            Research information and organize knowledge.
+                        </p>
+
+                        <button class="secondary-button agent-button">
+                            Launch Agent
+                        </button>
+
+                    </div>
+
+
+                    <div class="agent-card">
+
+                        <div class="agent-icon">💻</div>
+
+                        <h3>Developer Agent</h3>
+
+                        <p>
+                            Help build, analyze and debug software.
+                        </p>
+
+                        <button class="secondary-button agent-button">
+                            Launch Agent
+                        </button>
+
+                    </div>
+
+
+                    <div class="agent-card">
+
+                        <div class="agent-icon">📊</div>
+
+                        <h3>Data Agent</h3>
+
+                        <p>
+                            Analyze datasets and generate insights.
+                        </p>
+
+                        <button class="secondary-button agent-button">
+                            Launch Agent
+                        </button>
+
+                    </div>
+
+
+                    <div class="agent-card">
+
+                        <div class="agent-icon">⚙️</div>
+
+                        <h3>Automation Agent</h3>
+
+                        <p>
+                            Automate repetitive workflows.
+                        </p>
+
+                        <button class="secondary-button agent-button">
+                            Launch Agent
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATA PAGE -->
+            <div class="page" id="dataPage">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">ANALYTICS</span>
+
+                        <h1>Data</h1>
+
+                        <p>
+                            Your NEXORA intelligence dashboard.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <span>🧠</span>
+
+                        <div>
+                            <small>Memories</small>
+                            <strong id="memoryCount">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span>✅</span>
+
+                        <div>
+                            <small>Tasks</small>
+                            <strong id="taskCount">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span>💬</span>
+
+                        <div>
+                            <small>Messages</small>
+                            <strong id="messageCount">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span>🤖</span>
+
+                        <div>
+                            <small>AI Agents</small>
+                            <strong>4</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="data-panel">
+
+                    <h3>NEXORA System</h3>
+
+                    <div class="system-row">
+                        <span>Frontend</span>
+                        <strong class="online">Online</strong>
+                    </div>
+
+                    <div class="system-row">
+                        <span>Memory Engine</span>
+                        <strong class="online">Ready</strong>
+                    </div>
+
+                    <div class="system-row">
+                        <span>Task Engine</span>
+                        <strong class="online">Ready</strong>
+                    </div>
+
+                    <div class="system-row">
+                        <span>AI Backend</span>
+                        <strong id="backendStatus">Checking...</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay hidden" id="loginModal">
+
+    <div class="modal">
+
+        <button class="modal-close" id="closeLogin">
+            ×
+        </button>
+
+        <div class="modal-icon">
+            ◆
+        </div>
+
+        <h2 id="authTitle">Welcome to NEXORA</h2>
+
+        <p id="authDescription">
+            Sign in to your personal intelligence system.
+        </p>
+
+
+        <form id="loginForm">
+
+            <div id="authNameField" class="hidden">
+                <label for="loginName">Name</label>
+                <input
+                    type="text"
+                    id="loginName"
+                    placeholder="Enter your name"
+                    minlength="3">
+            </div>
+
+
+            <div id="authPhoneField" class="hidden">
+                <label for="loginPhone">Phone number</label>
+                <input
+                    type="tel"
+                    id="loginPhone"
+                    placeholder="+14155550123"
+                    pattern="\+[1-9][0-9]{7,14}"
+                    autocomplete="tel">
+            </div>
+
+
+            <div id="authEmailField">
+                <label for="loginEmail">Email</label>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@example.com"
+                    required
+                    autocomplete="email">
+            </div>
+
+
+            <div id="authPasswordField">
+                <label for="loginPassword">Password</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter password"
+                    required
+                    minlength="8"
+                    autocomplete="current-password">
+            </div>
+
+
+            <div id="authOtpField" class="hidden">
+                <label for="loginOtp">Verification code</label>
+                <input
+                    type="text"
+                    id="loginOtp"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
+                    placeholder="6-digit code">
+                <button type="button" id="resendOtpButton">Resend code</button>
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button login-submit">
+
+                <span id="authSubmitLabel">Sign In</span>
+
+            </button>
+
+        </form>
+
+        <p class="login-note" id="authModeFooter">
+            <span id="authModePrompt">New to NEXORA?</span>
+            <button type="button" id="authModeToggle">Create an account</button>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+<div id="toast" class="toast">
+    <span id="toastMessage"></span>
+</div>
+
+
+<script src="/frontend/app.js"></script>
+
+</body>
+</html>
